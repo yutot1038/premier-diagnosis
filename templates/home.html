@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>プレミア診断へようこそ</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <div class="container">
+    <h1>プレミアリーグ診断</h1>
+    <p>まずはあなたが診断したいポジションを選んでください</p>
+
+    <div class="position-buttons">
+      <a href="/transition?position=FW" class="pos-btn">フォワード（FW）</a>
+      <a href="/transition?position=MF" class="pos-btn">ミッドフィルダー（MF）</a>
+      <a href="/transition?position=DF" class="pos-btn">ディフェンダー（DF）</a>
+      <a href="/transition?position=GK" class="pos-btn">ゴールキーパー（GK）</a>
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>診断準備中...</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <style>
+    body, html {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      overflow: hidden;
+    }
+
+    .video-bg {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: -1;
+    }
+
+    .overlay {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.4); /* 半透明の黒いフィルター */
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      text-align: center;
+    }
+
+    .overlay h1 {
+      font-size: 2em;
+      margin-bottom: 20px;
+    }
+  </style>
+</head>
+<body>
+  <!-- 背景動画 -->
+  <video class="video-bg" autoplay muted loop playsinline>
+    <source src="{{ url_for('static', filename='video/9502523-uhd_4096_2160_24fps.mp4') }}" type="video/mp4">
+    あなたのブラウザは動画タグをサポートしていません。
+  </video>
+
+  <div class="overlay">
+    <h1>{{ position }}診断準備中...</h1>
+  </div>
+
+  <script>
+    setTimeout(() => {
+      window.location.href = "/form?position={{ position }}";
+    }, 5000); // 5秒後に遷移
+  </script>
+</body>
+</html>

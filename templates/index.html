@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>プレミア診断</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <div class="container">
+    <h1>LET'S診断</h1>
+
+    <form id="sliderForm">
+      <div class="slider-group">
+        <label>パワー型 / テクニック型</label>
+        <div class="slider-wrapper">
+          <input type="range" min="0" max="100" value="50" class="slider" />
+          <div class="tooltip">50</div>
+        </div>
+          
+      </div>
+      <div class="slider-group">
+        <label>熱血 / 冷静</label>
+        <div class="slider-wrapper">
+          <input type="range" min="0" max="100" value="50" class="slider" />
+          <div class="tooltip">50</div>
+        </div> 
+      </div>
+      <div class="slider-group">
+        <label>自分で行く / 味方を活かす</label>
+        <div class="slider-wrapper">
+          <input type="range" min="0" max="100" value="50" class="slider" />
+          <div class="tooltip">50</div>
+        </div>
+
+      </div>
+      <div class="slider-group">
+        <label>リーダーシップ / 自由奔放</label>
+        <div class="slider-wrapper">
+          <input type="range" min="0" max="100" value="50" class="slider" />
+          <div class="tooltip">50</div>
+        </div>
+        
+      </div>
+      <div class="slider-group">
+        <label>カリスマ性 / ストイック</label>
+        <div class="slider-wrapper">
+          <input type="range" min="0" max="100" value="50" class="slider" />
+          <div class="tooltip">50</div>
+        </div>
+        
+      </div>
+      <div class="slider-group">
+        <label>真面目 / おちゃめ</label>
+        <div class="slider-wrapper">
+          <input type="range" min="0" max="100" value="50" class="slider" />
+          <div class="tooltip">50</div>
+        </div>
+        
+      </div>
+      <div class="slider-group">
+        <label>ごつい / スタイリッシュ</label>
+        <div class="slider-wrapper">
+          <input type="range" min="0" max="100" value="50" class="slider" />
+          <div class="tooltip">50</div>
+        </div>
+        
+      </div>
+
+      <button type="submit">マッチングする</button>
+    </form>
+
+    <div id="result" class="result"></div>
+  </div>
+
+  <script>
+    document.getElementById("sliderForm").addEventListener("submit", async function (e) {
+      e.preventDefault();
+
+      const sliders = document.querySelectorAll(".slider");
+      const inputValues = Array.from(sliders).map(slider => parseInt(slider.value));
+
+      const response = await fetch("/match", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ input: inputValues }),
+      });
+
+      const data = await response.json();
+
+      const resultDiv = document.getElementById("result");
+      if (data.error) {
+        resultDiv.textContent = "エラー：" + data.error;
+      } else {
+        const query = new URLSearchParams({
+          name:data.name,
+          score:data.score
+        }).toString();
+
+        window.location.href="/result?"+query;  
+      }
+    });
+
+    document.querySelectorAll(".slider").forEach((slider, index) => {
+    const valueSpan = slider.parentElement.querySelector(".slider-value");
+    slider.addEventListener("input", () => {
+      valueSpan.textContent = slider.value;
+    });
+  });
+
+  document.querySelectorAll(".slider-wrapper").forEach(wrapper => {
+  const slider = wrapper.querySelector(".slider");
+  const tooltip = wrapper.querySelector(".tooltip");
+
+  const updateTooltip = () => {
+    const value = parseInt(slider.value);
+    tooltip.textContent = value;
+
+    const min = parseInt(slider.min);
+    const max = parseInt(slider.max);
+    const percent = (value - min) / (max - min);
+    
+    const sliderWidth = slider.offsetWidth;
+    const tooltipOffset = sliderWidth * percent;
+    tooltip.style.left = `${tooltipOffset}px`;
+  };
+
+  // 初期位置調整
+  updateTooltip();
+
+  // スライダー動かすたびに更新
+  slider.addEventListener("input", updateTooltip);
+});
+
+  </script>
+</body>
+</html>

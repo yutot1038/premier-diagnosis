@@ -1,0 +1,135 @@
+/* home.html */
+
+.position-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-top: 30px;
+  }
+  
+  .pos-btn {
+    display: block;
+    padding: 15px;
+    background-color: #0078D7;
+    color: white;
+    font-size: 18px;
+    text-align: center;
+    border-radius: 8px;
+    text-decoration: none;
+    transition: background-color 0.2s ease;
+  }
+  
+  .pos-btn:hover {
+    background-color: #005ea6;
+  }
+  
+
+/* index.html */
+
+body {
+    font-family: 'Helvetica Neue', sans-serif;
+    background: #f3f6fa;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    width: 80%;
+    max-width: 700px;
+    margin: 40px auto;
+    background: white;
+    border-radius: 8px;
+    padding: 30px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.1);
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 30px;
+    color: #333;
+}
+
+.slider-group {
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+}
+
+input[type="range"] {
+    width: 100%;
+}
+
+button {
+    width: 100%;
+    padding: 12px;
+    background-color: #0078D7;
+    color: white;
+    font-size: 16px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #005ea6;
+}
+
+#result {
+    margin-top: 30px;
+    text-align: center;
+    font-size: 1.2em;
+    color: #444;
+}
+
+.slider-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  
+  .slider-value {
+    min-width: 30px;
+    text-align: right;
+    font-weight: bold;
+    color: #0078D7;
+  }
+  
+  .slider-wrapper {
+    position: relative;
+    margin-bottom: 20px;
+  }
+  
+  .tooltip {
+    position: absolute;
+    top: -30px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #0078D7;
+    color: white;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 14px;
+    pointer-events: none;
+    white-space: nowrap;
+    transition: left 0.1s ease, top 0.1s ease;
+  }
+
+  
+  .back-button {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: #0078D7;
+    color: white;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.back-button:hover {
+    background-color: #005ea6;
+}
